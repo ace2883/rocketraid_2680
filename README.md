@@ -9,7 +9,7 @@ Meh, maybe I'll update this more as I go...
 
 Credit where credit is due - this is the culmination of a few days scouring the internet. It's not all mine, but I did the final patching to get this to work with kernel>=4.8.
 
-Currently working with: Kernel 4.9.6 4.9.16
+Currently working with: Kernel 4.9.0-3-amd64,4.9.6,4.9.16,...
 
 RocketRAID 268x SAS Controller Linux Open Source Driver
 Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
@@ -50,7 +50,7 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
 2. Build the driver as a kernel module
 #############################################################################
 
-  NOTE: The latest tested kernel version: 3.5.2.
+  NOTE: The latest tested kernel version: 4.9.*
   
   1) Install kernel build tools (gcc, binutils, make, etc.)
   
@@ -60,7 +60,7 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
      configuration for the kernel and the driver. Otherwise, the driver may 
      be unable to load, or behave abnormally.
      
-     - For Linux kernel 2.6 and 3.*-
+     - For Linux kernel 2.6.* and 3.*-
      
      On most distributions based on kernel 2.6 and 3.*, an exploded source tree is not
      required to build a driver against the currently in-use kernel. As long
@@ -112,9 +112,9 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
   
      After you have configured the kernel source/headers you can build the driver
      by following commands (assume you have extracted the driver source under
-     directory rr268x-linux-src-1.xx):
+     directory rocketraid_2680):
 
-        # cd rr268x-linux-src-v1.xx/product/rr2680/linux/
+        # cd rocketraid_2680/product/rr2680/linux/
         # make
         
      You can append below options to "make" command:
@@ -137,7 +137,7 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
      If you are building driver for currently in-use kernel you can use
      "make install" to install or upgrade the driver:
 
-        # cd rr268x-linux-src-v1.xx/product/rr2680/linux/
+        # cd rocketraid_2680/product/rr2680/linux/
         # make install
         
      The KERNELDIR=... parameter may be required, e.g.
@@ -169,7 +169,7 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
      You must have a full kernel source tree to use the driver as a patch.
      To patch a kernel source tree, run the command
      
-        # cd rr268x-linux-src-v1.xx/product/rr2680/linux/
+        # cd rocketraid_2680/product/rr2680/linux/
         # make patchkernel KERNELDIR=<kernel-source-dir>
         
      For an unconfigured 2.6 kernel source tree, include/linux/version.h may
@@ -204,6 +204,34 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
 4. Revision History
 #############################################################################
 
+   * fixed 4.9.*
+   * add DKMS
+
+   v2.1 02/24/2014
+     * If failed to install the required build toolchain, display a warning
+      message.
+     * Modify the modprobe config file, so SLES could load third party module
+       by default.
+     * Support openSUSE 12.1 systemd program.
+
+   v2.1 01/15/2014
+     * Support openSUSE 12.3 and 13.1.
+     * Source updated to support WebGUI communication without /proc/scsi entry.
+
+   v2.0 01/13/2014
+     * Minor changes to support Debian Linux 7.x, quiet installation.
+
+   v2.0 01/08/2014
+     * Minor changes to support Fedora Linux 19+.
+
+   v2.0 01/04/2014
+     * Support Kernel 3.12.5.
+     * Executable file to install and build source package.
+     * Automatically install required package if it is not installed.
+
+   v2.0 06/26/2013
+     * Support Linux kernel up to 3.9.7.
+
    v1.9.12.0817  08/17/2012
      * Fixed a potential bug about fail to recover array.
 
@@ -231,24 +259,3 @@ Copyright (C) 2012 HighPoint Technologies, Inc. All rights reserved.
 
    v1.0.08.0822  08/22/2008
      * First release.
-
-        
-#############################################################################
-5. Technical support and service
-#############################################################################
-
-  If you have questions about installing or using your HighPoint product,
-  check the user's guide or readme file first, and you will find answers to
-  most of your questions here. If you need further assistance, please
-  contact us. We offer the following support and information services:
-
-  1)  The HighPoint Web Site provides information on software upgrades,
-      answers to common questions, and other topics. The Web Site is
-      available from Internet 24 hours a day, 7 days a week, at
-      http://www.highpoint-tech.com.
-
-  2)  For technical support, send e-mail to support@highpoint-tech.com
-
-  NOTE: Before you send an e-mail, please visit our Web Site
-        (http://www.highpoint-tech.com) to check if there is a new or 
-        updated device driver for your system.
